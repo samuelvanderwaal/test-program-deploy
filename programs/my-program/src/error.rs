@@ -7,7 +7,7 @@ use solana_program::{
 use thiserror::Error;
 
 #[derive(Error, Clone, Debug, Eq, PartialEq, FromPrimitive)]
-pub enum MplProjectNameError {
+pub enum MyProgramError {
     /// 0 - Invalid System Program
     #[error("Invalid System Program")]
     InvalidSystemProgram,
@@ -19,20 +19,20 @@ pub enum MplProjectNameError {
     SerializationError,
 }
 
-impl PrintProgramError for MplProjectNameError {
+impl PrintProgramError for MyProgramError {
     fn print<E>(&self) {
         msg!(&self.to_string());
     }
 }
 
-impl From<MplProjectNameError> for ProgramError {
-    fn from(e: MplProjectNameError) -> Self {
+impl From<MyProgramError> for ProgramError {
+    fn from(e: MyProgramError) -> Self {
         ProgramError::Custom(e as u32)
     }
 }
 
-impl<T> DecodeError<T> for MplProjectNameError {
+impl<T> DecodeError<T> for MyProgramError {
     fn type_of() -> &'static str {
-        "Mpl Project Name Error"
+        "Program Error"
     }
 }

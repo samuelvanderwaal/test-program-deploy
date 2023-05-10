@@ -6,7 +6,7 @@ const clientDir = path.join(__dirname, "..", "clients");
 const idlDir = path.join(__dirname, "..", "idls");
 
 // Instanciate Kinobi.
-const kinobi = k.createFromIdls([path.join(idlDir, "mpl_project_name.json")]);
+const kinobi = k.createFromIdls([path.join(idlDir, "my_program.json")]);
 
 // Update accounts.
 kinobi.update(
@@ -16,9 +16,9 @@ kinobi.update(
         k.stringConstantSeed("myPdaAccount"),
         k.programSeed(),
         k.publicKeySeed("authority", "The address of the authority"),
-        k.stringSeed("name", "The name of the account"),
-      ],
-    },
+        k.stringSeed("name", "The name of the account")
+      ]
+    }
     // ...
   })
 );
@@ -27,8 +27,8 @@ kinobi.update(
 kinobi.update(
   new k.UpdateInstructionsVisitor({
     create: {
-      bytesCreatedOnChain: k.bytesFromAccount("myAccount"),
-    },
+      bytesCreatedOnChain: k.bytesFromAccount("myAccount")
+    }
     // ...
   })
 );
@@ -38,7 +38,7 @@ const key = (name) => ({ field: "key", value: k.vEnum("Key", name) });
 kinobi.update(
   new k.SetAccountDiscriminatorFromFieldVisitor({
     myAccount: key("MyAccount"),
-    myPdaAccount: key("MyPdaAccount"),
+    myPdaAccount: key("MyPdaAccount")
   })
 );
 

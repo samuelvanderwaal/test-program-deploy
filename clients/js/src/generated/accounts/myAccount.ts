@@ -119,8 +119,8 @@ export function getMyAccountGpaBuilder(
 ) {
   const s = context.serializer;
   const programId = context.programs.getPublicKey(
-    'mplProjectName',
-    'MyProgram1111111111111111111111111111111111'
+    'myProgram',
+    '2AMMY7hjwZbrvgYgQ2tXVxEKikv11QrZE4dLLmH53kei'
   );
   return gpaBuilder(context, programId)
     .registerFields<{ key: KeyArgs; authority: PublicKey; data: MyDataArgs }>({
