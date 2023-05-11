@@ -72,6 +72,9 @@ jobs:
           version: ${{ env.SOLANA_VERSION }}
           cache: ${{ env.CACHE }}
 
+      - name: Install Themis
+        uses: install-themis
+
       - name: Set RPC
         run: |
           if [ "${{ inputs.cluster }}" == "devnet" ]; then
