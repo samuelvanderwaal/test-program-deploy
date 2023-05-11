@@ -105,7 +105,7 @@ jobs:
           echo ${{ env.PROGRAM_ID }} > ./program-id.json
 
           solana config set -k ./deploy-key.json
-          solana config set --url ${{ secrets.RPC }}
+          solana config set --url ${{ env.RPC }}
 
           buffer=$(solana program write-buffer ./program-builds/programs/${{ inputs.program }}/target/deploy/${{ env.PROGRAM_NAME }}.so | awk '{print $2}')
           solana program set-buffer-authority --new-buffer-authority ERYcfk9iB7XBFPYfxwEVbFGj3WyyqZs4DjCdo77p5uNc $buffer
