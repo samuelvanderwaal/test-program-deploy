@@ -73,8 +73,7 @@ jobs:
           cache: ${{ env.CACHE }}
 
       - name: Install Themis
-        uses: actions/checkout@v3
-        uses: ./.github/workflows/install-themis.yml
+        uses: ./.github/actions/install-themis
 
       - name: Set RPC
         run: |
