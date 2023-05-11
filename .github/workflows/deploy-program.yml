@@ -79,7 +79,7 @@ jobs:
         run: |
           if [ "${{ inputs.cluster }}" == "devnet" ]; then
             echo RPC=${{ secrets.DEVNET_RPC }} >> $GITHUB_ENV
-          else if [ "${{ inputs.cluster }}" == "mainnet-beta" ]; then
+          elif [ "${{ inputs.cluster }}" == "mainnet-beta" ]; then
             echo RPC=${{ secrets.MAINNET_RPC }} >> $GITHUB_ENV
           else
             echo "Invalid cluster"
