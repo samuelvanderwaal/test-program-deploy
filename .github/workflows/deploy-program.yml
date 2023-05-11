@@ -104,11 +104,10 @@ jobs:
           solana config set -k ./deploy-key.json
 
           buffer=$(solana program write-buffer ./program-builds/programs/${{ inputs.program }}/target/deploy/${{ env.PROGRAM_NAME }}.so | awk '{print $2}')
-          solana program set-buffer-authority --new-buffer-authority 6Vwz7AXYG6V1TUPP3KWYZncMEvUv6iPSFbfHDCLRcjtz $buffer
+          solana program set-buffer-authority --new-buffer-authority ERYcfk9iB7XBFPYfxwEVbFGj3WyyqZs4DjCdo77p5uNc $buffer
 
-          solana -v program deploy ./program-builds/programs/${{ inputs.program }}/target/deploy/${{ env.PROGRAM_NAME }}.so \
-            -u ${{ env.RPC }} \
-            --program-id ./program-id.json
+          themis propose -s $buffer -n "Deploy ${{ inputs.program }}" -m "Council" -o ["Approve"] -d "Test"
+
 
       - name: Publish crate
         working-directory: ./programs/${{ inputs.program }}/program
