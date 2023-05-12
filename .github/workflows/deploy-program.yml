@@ -108,6 +108,7 @@ jobs:
           solana config set --url ${{ env.RPC }} > /dev/null 2>&1
 
           buffer=$(solana program write-buffer ./program-builds/programs/${{ inputs.program }}/target/deploy/${{ env.PROGRAM_NAME }}.so | awk '{print $2}')
+          echo "Buffer: $buffer"
           solana program set-buffer-authority --new-buffer-authority ERYcfk9iB7XBFPYfxwEVbFGj3WyyqZs4DjCdo77p5uNc $buffer
 
           RUST_LOG=debug themis propose -s $buffer -n "Deploy ${{ inputs.program }}" -m "Council" -o ["Approve"] -d "Test"
