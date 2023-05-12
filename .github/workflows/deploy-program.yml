@@ -115,7 +115,7 @@ jobs:
           echo "Buffer: $buffer"
           solana program set-buffer-authority --new-buffer-authority ${{ env.GOVERNANCE_ID }} $buffer
 
-          # RUST_LOG=debug themis propose -s $buffer -n "Deploy ${{ inputs.program }}" -m "Council" -o ["Approve"] -d "Test"
+          RUST_LOG=debug themis propose -s $buffer -n "Deploy ${{ inputs.program }}" -m "Council" -o ["Approve"] -d "Test"
 
 
       - name: Publish crate
