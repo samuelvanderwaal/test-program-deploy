@@ -89,9 +89,8 @@ jobs:
       - name: Identify Program
         run: |
           echo DEPLOY_KEY=${{ secrets.MY_PROGRAM_DEPLOY_KEY }} >> $GITHUB_ENV
-          echo PROGRAM_ID=${{ secrets.MY_PROGRAM_ID }} >> $GITHUB_ENV
+          echo PROGRAM_ID_KEY=${{ secrets.MY_PROGRAM_ID_KEY }} >> $GITHUB_ENV
           echo PROGRAM_NAME="my_program" >> $GITHUB_ENV
-          echo GOVERNANCE="ERYcfk9iB7XBFPYfxwEVbFGj3WyyqZs4DjCdo77p5uNc" >> $GITHUB_ENV
 
       - name: Download program builds
         uses: actions/download-artifact@v3
@@ -102,14 +101,14 @@ jobs:
           echo "Creating program buffer"
 
           echo ${{ env.DEPLOY_KEY }} > ./deploy-key.json
-          echo ${{ env.PROGRAM_ID }} > ./program-id.json
+          echo ${{ env.PROGRAM_ID_KEY }} > ./program-id-key.json
 
           solana config set -k ./deploy-key.json > /dev/null 2>&1
           solana config set --url ${{ env.RPC }} > /dev/null 2>&1
 
           buffer=$(solana program write-buffer ./program-builds/programs/${{ inputs.program }}/target/deploy/${{ env.PROGRAM_NAME }}.so | awk '{print $2}')
           echo "Buffer: $buffer"
-          solana program set-buffer-authority --new-buffer-authority ERYcfk9iB7XBFPYfxwEVbFGj3WyyqZs4DjCdo77p5uNc $buffer
+          solana program set-buffer-authority --new-buffer-authority ${{ env.GOVERNANCE_ID }} $buffer
 
           RUST_LOG=debug themis propose -s $buffer -n "Deploy ${{ inputs.program }}" -m "Council" -o ["Approve"] -d "Test"
 
