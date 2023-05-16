@@ -2,29 +2,6 @@ name: Deploy Program
 
 # Run on manual dispatch or if changes are detected in programs src files on commits to the main branch.
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "programs/**/src/**"
-    inputs:
-      program:
-        description: Program
-        required: true
-        default: my-program
-      cluster:
-        description: Cluster environment
-        required: true
-        default: devnet
-      publish_crate:
-        description: Release cargo crate
-        required: true
-        type: boolean
-        default: false
-      bump:
-        description: Version bump
-        required: true
-        default: patch
   workflow_dispatch:
     inputs:
       program:
