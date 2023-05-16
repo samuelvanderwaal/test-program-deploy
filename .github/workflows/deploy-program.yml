@@ -76,6 +76,9 @@ jobs:
       - name: Install Themis
         uses: ./.github/actions/install-themis
 
+      - name: Install Cargo Release
+        uses: ./.github/actions/install-cargo-release
+
       - name: Set RPC
         run: |
           if [ "${{ inputs.cluster }}" == "devnet" ]; then
