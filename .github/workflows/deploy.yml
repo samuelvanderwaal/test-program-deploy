@@ -1,4 +1,4 @@
-name: Deploy on changes to src/ on main branch
+name: Deploy
 
 on:
   push:
