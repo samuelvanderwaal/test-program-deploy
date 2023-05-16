@@ -1,6 +1,12 @@
 name: Deploy Program
 
+# Run on manual dispatch or if changes are detected in programs src files on commits to the main branch.
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "programs/**/src/**"
   workflow_dispatch:
     inputs:
       program:
@@ -117,11 +123,15 @@ jobs:
 
           RUST_LOG=debug themis propose -s $buffer -n "Deploy ${{ inputs.program }}" -m "Council" -o ["Approve"] -d "Test"
 
-
-      - name: Publish crate
+      - name: Bump version
         working-directory: ./programs/${{ inputs.program }}/program
-        if: github.event.inputs.publish_crate == 'true'
         run: |
-          cargo install cargo-release
-          cargo login ${{ secrets.CRATES_TOKEN }}
-          cargo release ${{ inputs.bump }} --execute
+          cargo release ${{ inputs.bump }} --no-publish
+
+      # - name: Publish crate
+      #   working-directory: ./programs/${{ inputs.program }}/program
+      #   if: github.event.inputs.publish_crate == 'true'
+      #   run: |
+      #     cargo install cargo-release
+      #     cargo login ${{ secrets.CRATES_TOKEN }}
+      #     cargo release ${{ inputs.bump }} --execute
