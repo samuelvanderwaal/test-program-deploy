@@ -76,8 +76,10 @@ jobs:
       - name: Install Themis
         uses: ./.github/actions/install-themis
 
-      - name: Install Cargo Release
-        uses: ./.github/actions/install-cargo-release
+      - name: Install cargo-release
+        uses: metaplex-foundation/actions/install-cargo-release@v1
+        with:
+          cache: ${{ env.CACHE }}
 
       - name: Set RPC
         run: |
