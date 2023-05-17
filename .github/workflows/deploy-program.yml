@@ -126,7 +126,7 @@ jobs:
       - name: Bump version
         working-directory: ./programs/${{ inputs.program }}
         run: |
-          cargo release ${{ inputs.bump }} --no-publish
+          cargo release ${{ inputs.bump }} --no-publish -x
 
       # - name: Publish crate
       #   working-directory: ./programs/${{ inputs.program }}/program
