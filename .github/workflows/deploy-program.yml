@@ -128,6 +128,7 @@ jobs:
       - name: Bump version
         working-directory: ./programs/${{ inputs.program }}
         run: |
+          git stash
           git config user.name "${{ env.COMMIT_USER_NAME }}"
           git config user.email "${{ env.COMMIT_USER_EMAIL }}"
           cargo release ${{ inputs.bump }} --no-confirm --no-publish -x
