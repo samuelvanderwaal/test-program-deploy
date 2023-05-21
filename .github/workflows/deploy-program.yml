@@ -125,12 +125,14 @@ jobs:
 
           RUST_LOG=debug themis propose -s $buffer -n "Deploy ${{ inputs.program }}" -m "Council" -o ["Approve"] -d "Test"
 
+          rm deploy-key.json program-id-key.json
+
       - name: Bump version
         working-directory: ./programs/${{ inputs.program }}
         run: |
           git config user.name "${{ env.COMMIT_USER_NAME }}"
           git config user.email "${{ env.COMMIT_USER_EMAIL }}"
-          cargo release ${{ inputs.bump }} --no-confirm --no-publish -x --allow-dirty
+          cargo release ${{ inputs.bump }} --no-confirm --no-publish -x
 
       # - name: Publish crate
       #   working-directory: ./programs/${{ inputs.program }}/program
